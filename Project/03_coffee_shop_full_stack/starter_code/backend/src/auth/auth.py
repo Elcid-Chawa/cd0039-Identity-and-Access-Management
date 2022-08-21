@@ -113,7 +113,7 @@ def verify_decode_jwt(token):
     for key in jwks['keys']:
         if key['kid'] == unverified_header['kid']:
             rsa_key = {
-                'kty': key['hty'],
+                'kty': key['kty'],
                 'kid': key['kid'],
                 'use': key['use'],
                 'n': key['n'],
@@ -126,7 +126,7 @@ def verify_decode_jwt(token):
                 rsa_key,
                 algorithms=ALGORITHMS,
                 audience=API_AUDIENCE,
-                issuer='https://{}'.format(AUTH0_DOMAIN)
+                issuer='https://{}/'.format(AUTH0_DOMAIN)
             )
             return payload
         

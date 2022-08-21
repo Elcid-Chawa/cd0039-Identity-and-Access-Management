@@ -23,7 +23,7 @@ def long_drinks(drinks):
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 !! Running this funciton will add one
 '''
-# db_drop_and_create_all()
+db_drop_and_create_all()
 
 # ROUTES
 '''
@@ -38,15 +38,14 @@ def long_drinks(drinks):
 def get_drinks():
     try:
         allDrinks = Drink.query.all()
-
+        
         if allDrinks is None:
             abort(404)
-        
+
         return jsonify({
                 "success": True,
                 "drinks": short_drinks(allDrinks)
             }), 200
-
     except:
         abort(422)
 
@@ -141,7 +140,7 @@ def update_drinks(payload, id):
     returns status code 200 and json {"success": True, "delete": id} where id is the id of the deleted record
         or appropriate status code indicating reason for failure
 '''
-@app.route("/drinks/<int:id>", methods=["POST"])
+@app.route("/drinks/<int:id>", methods=["DELETE"])
 @requires_auth("delete:drinks")
 def delete_drink(payload, id):
     try:
